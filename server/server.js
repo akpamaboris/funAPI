@@ -1,6 +1,7 @@
 const mongoose = require("./db/mongoose");
 const Todo = require("./models/todo");
 const User = require("./models/user");
+mongoose.Promise = global.Promise;
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -18,6 +19,17 @@ app.post("/todos", (req, res) => {
     (err) => {
       console.log("an error occured");
       res.status(500).json({ error: err });
+    }
+  );
+});
+
+app.get("/todos", (req, res) => {
+  Todo.find().then(
+    (todos) => {
+      res.status(200).json({ todos });
+    },
+    (err) => {
+      res.status(500).json({ error: err.message });
     }
   );
 });
