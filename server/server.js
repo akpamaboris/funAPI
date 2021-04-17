@@ -27,6 +27,10 @@ app.get("/", (req, res) => {
   res.send("<h1> now in index</h1>");
 });
 
+app.all("*", (req, res) => {
+  res.send("<h1>route not found</h1>");
+});
+
 app.listen(3000, () => {
   console.log("Started listening on port 3000 😎");
 });
